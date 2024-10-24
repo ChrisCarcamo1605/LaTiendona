@@ -21,9 +21,19 @@ public class Producto {
     String nombre;
     String descripcion;
     double precio;
-    @ManyToOne // Cambiado a ManyToOne
+    @ManyToOne
     @JoinColumn(name = "tipo")
+
     TipoProducto tipo;
+
+
+    public Producto(String nombre, String descripcion, double precio, TipoProducto tipo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.tipo = tipo;
+
+    }
 
 
 

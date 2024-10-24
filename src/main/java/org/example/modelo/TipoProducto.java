@@ -9,13 +9,22 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 @EqualsAndHashCode(of = "id")
 @Embeddable
 public class TipoProducto{
+
+    public TipoProducto(){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    public TipoProducto(String nombre){
+        this.nombre = nombre;
+    }
 
     private String nombre;
 
