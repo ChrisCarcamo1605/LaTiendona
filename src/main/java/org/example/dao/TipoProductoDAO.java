@@ -1,7 +1,10 @@
 package org.example.dao;
 
 import jakarta.persistence.EntityManager;
+import org.example.modelo.Producto;
 import org.example.modelo.TipoProducto;
+
+import java.util.List;
 
 public class TipoProductoDAO {
 
@@ -21,4 +24,6 @@ public class TipoProductoDAO {
        tipoProducto=this.em.merge(tipoProducto);
         this.em.remove(tipoProducto);
    }
+
+
 }
