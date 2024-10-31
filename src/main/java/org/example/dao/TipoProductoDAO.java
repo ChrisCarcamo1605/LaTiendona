@@ -15,15 +15,34 @@ public class TipoProductoDAO {
    public void guardar(TipoProducto tipoProducto){
        em.persist(tipoProducto);
    }
+   public TipoProducto buscarPorId(Long id) {
+        return em.find(TipoProducto.class, id);
+    }
 
    public void actualizar(TipoProducto tipoProducto){
-       this.em.merge(tipoProducto);
+     em.merge(tipoProducto);
    }
-   public void eliminar(TipoProducto tipoProducto){
+  public void eliminar(Long id) {
+        try {
+            em.getTransaction().begin();
+            TipoProducto producto = em.find(TipoProducto.class, id);
+            if (producto != null) {
+                em.remove(producto);
 
-       tipoProducto=this.em.merge(tipoProducto);
-        this.em.remove(tipoProducto);
-   }
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction() != null) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+
+    }
+    public List<TipoProducto> consultaTodos(){
+        String jpql = "SELECT P FROM TipoProducto AS P";
+        return em.createQuery(jpql,TipoProducto.class).getResultList();
+    }
 
 
 }
